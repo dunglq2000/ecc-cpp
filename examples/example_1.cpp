@@ -1,6 +1,6 @@
-#include "ecdh.hpp"
-#include "blake2b.hpp"
-#include "ecdsa.hpp"
+#include <ecc-cpp/ecdh.hpp>
+#include <ecc-cpp/blake2b.hpp>
+#include <ecc-cpp/ecdsa.hpp>
 #include <iostream>
 #include <iomanip>
 #include <sstream>

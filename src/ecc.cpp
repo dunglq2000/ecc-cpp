@@ -1,5 +1,5 @@
-#include "bigint.hpp"
-#include "ecc.hpp"
+#include <ecc-cpp/bigint.hpp>
+#include <ecc-cpp/ecc.hpp>
 #include <iostream>
 
 Ecc_Point Ecc_Point::operator+(const Ecc_Point& other) const {

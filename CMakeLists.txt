@@ -21,20 +21,24 @@ set(SOURCES
     src/ecdh.cpp
     src/blake2b.cpp
     src/ecdsa.cpp
-    src/test.cpp
 )
 
-# Create executable from sources
-add_executable(ecc-cpp ${SOURCES})
+add_library(
+  ecc-cpp 
+  ${SOURCES}
+)
+
+# Move examples from `test` directory to `examples`
+add_subdirectory(examples)
 
 # Include directories for header files
-target_include_directories(ecc-cpp PRIVATE include)
+target_include_directories(ecc-cpp PUBLIC include)
 
 # Link against GMP library
 target_link_libraries(ecc-cpp PkgConfig::GMP)
 
 # Set ecc-cpp as the startup project for Visual Studio
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ecc-cpp)
+# set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ecc-cpp)
 
 # Additional flags for Debug configuration
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")

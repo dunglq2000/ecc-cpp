@@ -1,6 +1,6 @@
-#include "ecdsa.hpp"
-#include"ecc.hpp"
-#include "bigint.hpp"
+#include <ecc-cpp/ecdsa.hpp>
+#include <ecc-cpp/ecc.hpp>
+#include <ecc-cpp/bigint.hpp>
 #include <iomanip>
 #include <sstream>
 

@@ -1,4 +1,5 @@
-![ecc-cpp Logo](./Images/ecc-cpp.png)
+![ecc-cpp Logo](./images/ecc-cpp.png)
+
 # ecc-cpp: Elliptic Curve Cryptography Library in C++
 
 ecc-cpp is a comprehensive C++ library that implements Elliptic Curve Cryptography (ECC), providing functionalities for basic elliptic curve operations, Elliptic Curve Diffie-Hellman (ECDH), and Elliptic Curve Digital Signature Algorithm (ECDSA). This library uses the GNU Multiple Precision Arithmetic Library (GMP) for big integer operations and includes an implementation of the Blake2b cryptographic hash function.
@@ -13,7 +14,7 @@ ecc-cpp is a comprehensive C++ library that implements Elliptic Curve Cryptograp
 
 ## File Structure
 
-- `include/`: Header files for the library.
+- `include/ecc-cpp`: Header files for the library.
   - `bigint.hpp`: Definition for big integer operations using GMP.
   - `blake2b.hpp`: Interface for the Blake2b hash function.
   - `ecc.hpp`: Definitions for elliptic curve operations.
@@ -25,7 +26,7 @@ ecc-cpp is a comprehensive C++ library that implements Elliptic Curve Cryptograp
   - `ecc.cpp`: Implementation of basic elliptic curve operations.
   - `ecdh.cpp`: Implementation of ECDH.
   - `ecdsa.cpp`: Implementation of ECDSA.
-- `test/`: Test files for the library's functionalities.
+- `examples/`: Examples for the library's functionalities.
 - `CMakeLists.txt`: CMake configuration file.
 - `Doxyfile`: Doxygen configuration file for generating documentation.
 
@@ -51,25 +52,36 @@ To build the library, you will need CMake and GMP installed on your system. You 
    make
    ```
 
-4. To run tests, execute:
-   ```
-   ./ecc-cpp_test
-   ```
-
-## Usage
+## Usage library in main project
 
 After building the library, you can include the headers in your C++ project and link against the `ecc-cpp` library.
 
-Here is a simple example demonstrating how to sign and verify a message using ECDSA:
+Here is a simple example demonstrating how to sign and verify a message using ECDSA.
+
+Firstly, create your project directory and clone the repository into it:
+
+```
+mkdir my_project && cd my_project
+git clone https://github.com/crypto-keys-unlocked/ecc-cpp.git
+```
+
+Create main source file `main.cpp` and `CMakeLists.txt`:
+
+```
+touch main.cpp CMakeLists.txt
+```
+
+Paste the following content to `main.cpp`:
 
 ```cpp
-#include "ecdsa.hpp"
-#include "ecc.hpp"
-#include "bigint.hpp"
+#include <ecc-cpp/ecdsa.hpp>
+#include <ecc-cpp/ecc.hpp>
+#include <ecc-cpp/bigint.hpp>
 
 int main() {
     auto [publicKey, privateKey] = ECDH::generateKeyPair();
-    std::string message = "Hello, world!";
+    std::string msg = "Example message";
+    std::vector<uint8_t> message(msg.begin(), msg.end());
     auto signature = ECDSA::sign(privateKey, message);
     bool isValid = ECDSA::verify(publicKey, message, signature);
     
@@ -81,6 +93,36 @@ int main() {
 
     return 0;
 }
+```
+
+Paste the following content to `CMakeLists.txt`:
+
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(test_ecc_cpp)
+
+add_subdirectory(ecc-cpp)
+
+add_executable(main main.cpp)
+target_link_libraries(main PRIVATE ecc-cpp)
+```
+
+Create directory for building the project:
+
+```
+mkdir build && cd build
+```
+
+Build the project:
+
+```
+cmake .. && make
+```
+
+The main executable file `main` is built. By default, the examples in `ecc-cpp/examples` are also built. Now run the executable with
+
+```
+./main
 ```
 
 For detailed documentation on each function and class, refer to the generated Doxygen documentation.

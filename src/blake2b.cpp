@@ -1,4 +1,4 @@
-#include "blake2b.hpp"
+#include <ecc-cpp/blake2b.hpp>
 #include <cstring>
 #include <stdexcept> // For std::invalid_argument
 

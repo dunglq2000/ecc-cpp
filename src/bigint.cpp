@@ -1,4 +1,4 @@
-#include "bigint.hpp"
+#include <ecc-cpp/bigint.hpp>
 #include <stdexcept>
 #include <iostream>
 

@@ -1,5 +1,5 @@
-#include "ecdh.hpp"
-#include "ecc.hpp"
+#include <ecc-cpp/ecdh.hpp>
+#include <ecc-cpp/ecc.hpp>
 #include <iostream>
 
 namespace ECDH {
